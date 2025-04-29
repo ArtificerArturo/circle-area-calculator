@@ -1,0 +1,92 @@
+#circleCalculator {
+   max-width: 400px;
+   margin: 0 auto;
+   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+   font-size: 18px;
+}
+
+#circleCalculator #title {
+   display: flex;
+   justify-content: center;
+}
+
+#circleCalculator #intro {
+   color: #666;
+   font-size: 14px;
+}
+
+#circleCalculator .background {
+   background-color: #fafafa;
+   padding: 20px;
+   border: solid 1px #cbcbcb;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+}
+
+#circleCalculator input {
+   padding: 10px;
+   background-color: white;
+   border: solid 1px #cbcbcb;
+   width: 65px;
+}
+
+#circleCalculator .reset {
+   display: flex;
+   justify-content: center;
+}
+
+#circleCalculator .reset button {
+   border: none;
+   background-color: #fafafa;
+   color: #000000;
+   padding: 0;
+   font-size: 13px;
+}
+
+#circleCalculator #bugLink {
+   font-size: medium;
+   padding: 10px;
+   text-align: left;
+}
+
+#circleCalculator #inputFields {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+#circleCalculator label {
+   width: 118px;
+}
+
+#circleCalculator select {
+   width: 50px;
+}
+
+#circleCalculator .labelInputCombo {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   gap: 10px;
+}
+
+/* do not bring to wordpress below this line */
+#circleCalculator a {
+   text-decoration: underline;
+   color: #000;
+   transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+   text-align: center;
+   font-size: 90%;
+}
+
+#circleCalculator a:hover {
+   text-decoration-color: #fc0;
+   -webkit-text-fill-color: #000;
+   -webkit-text-stroke-width: 0.5px;
+   -webkit-text-stroke-color: #000;
+   transition-timing-function: ease;
+   transition-duration: 3s;
+}
