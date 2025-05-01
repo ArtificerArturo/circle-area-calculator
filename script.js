@@ -12,61 +12,70 @@ function calculateCircle(event) {
    let diameter = 0
    let circumference = 0
    let area = 0
+   let radiusUnit = radiusDropdown.value
+   let diameterUnit = diameterDropdown.value
+   let circumferenceUnit = circumferenceDropdown.value
+   let areaUnit = areaDropdown.value
 
    if (event?.target == radiusInput) {
       if (isNaN(radiusInput.value) || radiusInput.value == "") return
-      radius = convertToMeters(parseFloat(radiusInput.value.replace(/,/g, "")), radiusDropdown.value)
+      radius = convertToMeters(parseFloat(radiusInput.value.replace(/,/g, "")), radiusUnit)
       diameter = 2 * radius
       circumference = Math.PI * radius * 2
       area = Math.PI * (radius * radius)
-      console.log(radius, diameter, circumference, area)
 
-      diameterInput.value = resultConditioner(convertFromMeters(diameter, diameterDropdown.value))
-      circumferenceInput.value = resultConditioner(
-         convertFromMeters(circumference, circumferenceDropdown.value)
-      )
-      areaInput.value = resultConditioner(convertFromSquareMeters(area, areaDropdown.value))
+      diameterInput.value = resultConditioner(convertFromMeters(diameter, diameterUnit))
+      circumferenceInput.value = resultConditioner(convertFromMeters(circumference, circumferenceUnit))
+      areaInput.value = resultConditioner(convertFromSquareMeters(area, areaUnit))
+
       //radiusInput.value = resultConditioner(parseFloat(radiusInput.value)) //this doesn't work right
+      unitArray = [radiusUnit, diameterUnit, circumferenceUnit, areaUnit]
    }
    if (event?.target == diameterInput) {
       if (isNaN(diameterInput.value) || diameterInput.value == "") return
-      diameter = convertToMeters(parseFloat(diameterInput.value.replace(/,/g, "")), diameterDropdown.value)
+      diameter = convertToMeters(parseFloat(diameterInput.value.replace(/,/g, "")), diameterUnit)
       radius = diameter / 2
       circumference = Math.PI * diameter
       area = Math.PI * ((diameter / 2) * (diameter / 2))
 
-      radiusInput.value = resultConditioner(convertFromMeters(radius, radiusDropdown.value))
-      circumferenceInput.value = resultConditioner(
-         convertFromMeters(circumference, circumferenceDropdown.value)
-      )
-      areaInput.value = resultConditioner(convertFromSquareMeters(area, areaDropdown.value))
+      radiusInput.value = resultConditioner(convertFromMeters(radius, radiusUnit))
+      circumferenceInput.value = resultConditioner(convertFromMeters(circumference, circumferenceUnit))
+      areaInput.value = resultConditioner(convertFromSquareMeters(area, areaUnit))
+      unitArray = [radiusUnit, diameterUnit, circumferenceUnit, areaUnit]
    }
    if (event?.target == circumferenceInput) {
       if (isNaN(circumferenceInput.value) || circumferenceInput.value == "") return
-      circumference = convertToMeters(
-         parseFloat(circumferenceInput.value.replace(/,/g, "")),
-         circumferenceDropdown.value
-      )
+      circumference = convertToMeters(parseFloat(circumferenceInput.value.replace(/,/g, "")), circumferenceUnit)
       diameter = circumference / Math.PI
       radius = circumference / Math.PI / 2
       area = Math.PI * ((circumference / Math.PI / 2) * (circumference / Math.PI / 2))
 
-      diameterInput.value = resultConditioner(convertFromMeters(diameter, diameterDropdown.value))
-      radiusInput.value = resultConditioner(convertFromMeters(radius, radiusDropdown.value))
-      areaInput.value = resultConditioner(convertFromSquareMeters(area, areaDropdown.value))
+      diameterInput.value = resultConditioner(convertFromMeters(diameter, diameterUnit))
+      radiusInput.value = resultConditioner(convertFromMeters(radius, radiusUnit))
+      areaInput.value = resultConditioner(convertFromSquareMeters(area, areaUnit))
+      unitArray = [radiusUnit, diameterUnit, circumferenceUnit, areaUnit]
    }
    if (event?.target == areaInput) {
       if (isNaN(areaInput.value) || areaInput.value == "") return
-      area = convertToSquareMeters(parseFloat(areaInput.value.replace(/,/g, "")), areaDropdown.value)
+      area = convertToSquareMeters(parseFloat(areaInput.value.replace(/,/g, "")), areaUnit)
       radius = Math.sqrt(area / Math.PI)
       diameter = Math.sqrt(area / Math.PI) * 2
       circumference = Math.sqrt(area / Math.PI) * 2 * Math.PI
 
-      radiusInput.value = resultConditioner(convertFromMeters(radius, radiusDropdown.value))
-      diameterInput.value = resultConditioner(convertFromMeters(diameter, diameterDropdown.value))
-      circumferenceInput.value = resultConditioner(
-         convertFromMeters(circumference, circumferenceDropdown.value)
-      )
+      radiusInput.value = resultConditioner(convertFromMeters(radius, radiusUnit))
+      diameterInput.value = resultConditioner(convertFromMeters(diameter, diameterUnit))
+      circumferenceInput.value = resultConditioner(convertFromMeters(circumference, circumferenceUnit))
+      unitArray = [radiusUnit, diameterUnit, circumferenceUnit, areaUnit]
+   }
+   if (event.target == radiusDropdown) {
+      //how to get the previous unit?
+      console.log("radius unit changed")
+      console.log(unitArray)
+      let test1 = convertToMeters(radiusInput.value, unitArray[0])
+      console.log(test1)
+      let test2 = convertFromMeters(test1, radiusDropdown.value)
+      console.log(test2)
+      radiusInput.value = test2
    }
 }
 
@@ -132,21 +141,6 @@ function clearForm() {
    diameterDropdown.value = "m"
    circumferenceDropdown.value = "m"
    areaDropdown.value = "m2"
-}
-
-function changeFields(event) {
-   const radiusInput = document.querySelector("#circleCalculator #radiusInput")
-   const diameterInput = document.querySelector("#circleCalculator #diameterInput")
-   const circumferenceInput = document.querySelector("#circleCalculator #circumferenceInput")
-   const areaInput = document.querySelector("#circleCalculator #areaInput")
-   const radiusDropdown = document.querySelector("#circleCalculator #radiusDropdown")
-   const diameterDropdown = document.querySelector("#circleCalculator #diameterDropdown")
-   const circumferenceDropdown = document.querySelector("#circleCalculator #circumferenceDropdown")
-   const areaDropdown = document.querySelector("#circleCalculator #areaDropdown")
-
-   if (event.target == radiusInput) {
-      //how to get the previous unit?
-   }
 }
 
 function resultConditioner(number) {

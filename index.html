@@ -21,7 +21,7 @@
                   <label for="radiusInput">Radius</label>
                   <input onkeyup="calculateCircle(event)" id="radiusInput" placeholder="r" type="text" />
                   <div>
-                     <select onchange="changeFields(event)" id="radiusDropdown">
+                     <select onchange="calculateCircle(event)" id="radiusDropdown">
                         <option value="mm">mm</option>
                         <option value="cm">cm</option>
                         <option value="m" selected="selected">m</option>
@@ -37,7 +37,7 @@
                   <label for="diameterInput">Diameter</label>
                   <input onkeyup="calculateCircle(event)" id="diameterInput" placeholder="d" type="text" />
                   <div>
-                     <select onchange="changeFields(event)" id="diameterDropdown">
+                     <select onchange="calculateCircle(event)" id="diameterDropdown">
                         <option value="mm">mm</option>
                         <option value="cm">cm</option>
                         <option value="m" selected="selected">m</option>
@@ -51,14 +51,9 @@
                </div>
                <div class="labelInputCombo">
                   <label for="circumferenceInput">Circumference</label>
-                  <input
-                     onkeyup="calculateCircle(event)"
-                     id="circumferenceInput"
-                     placeholder="c"
-                     type="text"
-                  />
+                  <input onkeyup="calculateCircle(event)" id="circumferenceInput" placeholder="c" type="text" />
                   <div>
-                     <select onchange="changeFields(event)" id="circumferenceDropdown">
+                     <select onchange="calculateCircle(event)" id="circumferenceDropdown">
                         <option value="mm">mm</option>
                         <option value="cm">cm</option>
                         <option value="m" selected="selected">m</option>
@@ -74,7 +69,7 @@
                   <label for="areaInput">Area</label>
                   <input onkeyup="calculateCircle(event)" id="areaInput" placeholder="a" type="text" />
                   <div>
-                     <select onchange="changeFields(event)" id="areaDropdown">
+                     <select onchange="calculateCircle(event)" id="areaDropdown">
                         <option value="mm2">mm²</option>
                         <option value="cm2">cm²</option>
                         <option value="m2" selected="selected">m²</option>
