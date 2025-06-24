@@ -68,14 +68,33 @@ function calculateCircle(event) {
       unitArray = [radiusUnit, diameterUnit, circumferenceUnit, areaUnit]
    }
    if (event.target == radiusDropdown) {
-      //how to get the previous unit?
-      console.log("radius unit changed")
-      console.log(unitArray)
-      let test1 = convertToMeters(radiusInput.value, unitArray[0])
-      console.log(test1)
-      let test2 = convertFromMeters(test1, radiusDropdown.value)
-      console.log(test2)
-      radiusInput.value = test2
+      let unitChangingFrom = radiusDropdown.getAttribute("data-unit")
+      radiusInput.value = convertFromMeters(convertToMeters(radiusInput.value, unitChangingFrom), radiusDropdown.value)
+      radiusDropdown.setAttribute("data-unit", radiusDropdown.value)
+   }
+   if (event.target == diameterDropdown) {
+      let unitChangingFrom = diameterDropdown.getAttribute("data-unit")
+      diameterInput.value = convertFromMeters(
+         convertToMeters(diameterInput.value, unitChangingFrom),
+         diameterDropdown.value
+      )
+      diameterDropdown.setAttribute("data-unit", diameterDropdown.value)
+   }
+   if (event.target == circumferenceDropdown) {
+      let unitChangingFrom = circumferenceDropdown.getAttribute("data-unit")
+      circumferenceInput.value = convertFromMeters(
+         convertToMeters(circumferenceInput.value, unitChangingFrom),
+         circumferenceDropdown.value
+      )
+      circumferenceDropdown.setAttribute("data-unit", circumferenceDropdown.value)
+   }
+   if (event.target == areaDropdown) {
+      let unitChangingFrom = areaDropdown.getAttribute("data-unit")
+      areaInput.value = convertFromSquareMeters(
+         convertToSquareMeters(areaInput.value, unitChangingFrom),
+         areaDropdown.value
+      )
+      areaDropdown.setAttribute("data-unit", areaDropdown.value)
    }
 }
 

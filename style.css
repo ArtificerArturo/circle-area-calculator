@@ -1,5 +1,5 @@
 #circleCalculator {
-   max-width: 400px;
+   max-width: 500px;
    margin: 0 auto;
    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif,
       "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -30,7 +30,7 @@
    padding: 10px;
    background-color: white;
    border: solid 1px #cbcbcb;
-   width: 65px;
+   width: 95px;
 }
 
 #circleCalculator .reset {
@@ -63,7 +63,7 @@
 }
 
 #circleCalculator select {
-   width: 50px;
+   width: 70px;
 }
 
 #circleCalculator .labelInputCombo {
