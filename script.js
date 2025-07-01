@@ -19,7 +19,8 @@ function calculateCircle(event) {
 
    if (event?.target == radiusInput) {
       if (isNaN(radiusInput.value) || radiusInput.value == "") return
-      radius = convertToMeters(parseFloat(radiusInput.value.replace(/,/g, "")), radiusUnit)
+      radius = convertToMeters(parseFloat(radiusInput.value), radiusUnit)
+      console.log(radius)
       diameter = 2 * radius
       circumference = Math.PI * radius * 2
       area = Math.PI * (radius * radius)
@@ -27,13 +28,11 @@ function calculateCircle(event) {
       diameterInput.value = resultConditioner(convertFromMeters(diameter, diameterUnit))
       circumferenceInput.value = resultConditioner(convertFromMeters(circumference, circumferenceUnit))
       areaInput.value = resultConditioner(convertFromSquareMeters(area, areaUnit))
-
-      //radiusInput.value = resultConditioner(parseFloat(radiusInput.value)) //this doesn't work right
       unitArray = [radiusUnit, diameterUnit, circumferenceUnit, areaUnit]
    }
    if (event?.target == diameterInput) {
       if (isNaN(diameterInput.value) || diameterInput.value == "") return
-      diameter = convertToMeters(parseFloat(diameterInput.value.replace(/,/g, "")), diameterUnit)
+      diameter = convertToMeters(parseFloat(diameterInput.value), diameterUnit)
       radius = diameter / 2
       circumference = Math.PI * diameter
       area = Math.PI * ((diameter / 2) * (diameter / 2))
@@ -45,7 +44,7 @@ function calculateCircle(event) {
    }
    if (event?.target == circumferenceInput) {
       if (isNaN(circumferenceInput.value) || circumferenceInput.value == "") return
-      circumference = convertToMeters(parseFloat(circumferenceInput.value.replace(/,/g, "")), circumferenceUnit)
+      circumference = convertToMeters(parseFloat(circumferenceInput.value), circumferenceUnit)
       diameter = circumference / Math.PI
       radius = circumference / Math.PI / 2
       area = Math.PI * ((circumference / Math.PI / 2) * (circumference / Math.PI / 2))
@@ -57,7 +56,7 @@ function calculateCircle(event) {
    }
    if (event?.target == areaInput) {
       if (isNaN(areaInput.value) || areaInput.value == "") return
-      area = convertToSquareMeters(parseFloat(areaInput.value.replace(/,/g, "")), areaUnit)
+      area = convertToSquareMeters(parseFloat(areaInput.value), areaUnit)
       radius = Math.sqrt(area / Math.PI)
       diameter = Math.sqrt(area / Math.PI) * 2
       circumference = Math.sqrt(area / Math.PI) * 2 * Math.PI
@@ -69,30 +68,40 @@ function calculateCircle(event) {
    }
    if (event.target == radiusDropdown) {
       let unitChangingFrom = radiusDropdown.getAttribute("data-unit")
-      radiusInput.value = convertFromMeters(convertToMeters(radiusInput.value, unitChangingFrom), radiusDropdown.value)
       radiusDropdown.setAttribute("data-unit", radiusDropdown.value)
+      if (isNaN(radiusInput.value) || radiusInput.value == "") return
+      radiusInput.value = resultConditioner(
+         convertFromMeters(convertToMeters(parseFloat(radiusInput.value), unitChangingFrom), radiusDropdown.value)
+      )
    }
    if (event.target == diameterDropdown) {
       let unitChangingFrom = diameterDropdown.getAttribute("data-unit")
-      diameterInput.value = convertFromMeters(
-         convertToMeters(diameterInput.value, unitChangingFrom),
-         diameterDropdown.value
-      )
       diameterDropdown.setAttribute("data-unit", diameterDropdown.value)
+      if (isNaN(diameterInput.value) || diameterInput.value == "") return
+      diameterInput.value = resultConditioner(
+         convertFromMeters(convertToMeters(parseFloat(diameterInput.value), unitChangingFrom), diameterDropdown.value)
+      )
    }
    if (event.target == circumferenceDropdown) {
       let unitChangingFrom = circumferenceDropdown.getAttribute("data-unit")
-      circumferenceInput.value = convertFromMeters(
-         convertToMeters(circumferenceInput.value, unitChangingFrom),
-         circumferenceDropdown.value
-      )
       circumferenceDropdown.setAttribute("data-unit", circumferenceDropdown.value)
+      if (isNaN(circumferenceInput.value) || circumferenceInput.value == "") return
+      circumferenceInput.value = resultConditioner(
+         convertFromMeters(
+            convertToMeters(parseFloat(circumferenceInput.value), unitChangingFrom),
+            circumferenceDropdown.value
+         )
+      )
    }
    if (event.target == areaDropdown) {
       let unitChangingFrom = areaDropdown.getAttribute("data-unit")
-      areaInput.value = convertFromSquareMeters(
-         convertToSquareMeters(areaInput.value, unitChangingFrom),
-         areaDropdown.value
+      areaDropdown.setAttribute("data-unit", areaDropdown.value)
+      if (isNaN(areaInput.value) || areaInput.value == "") return
+      areaInput.value = resultConditioner(
+         convertFromSquareMeters(
+            convertToSquareMeters(parseFloat(areaInput.value), unitChangingFrom),
+            areaDropdown.value
+         )
       )
       areaDropdown.setAttribute("data-unit", areaDropdown.value)
    }
@@ -166,13 +175,9 @@ function resultConditioner(number) {
    //Intelligent rounding. Results with only a decimal component need sig figs,
    //results greater than 1 do not
    if (number < 1 && number > -1) {
-      number = numberWithCommas(+number.toPrecision(4))
+      number = +number.toPrecision(3)
    } else {
-      number = numberWithCommas(+number.toFixed(4))
+      number = +number.toFixed(3)
    }
    return number
-}
-function numberWithCommas(number) {
-   //taken from SO. Worked better than .toLocaleString()
-   return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
 }

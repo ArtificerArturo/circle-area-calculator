@@ -30,7 +30,8 @@
    padding: 10px;
    background-color: white;
    border: solid 1px #cbcbcb;
-   width: 95px;
+   color: #3a3a3a;
+   width: 115px;
 }
 
 #circleCalculator .reset {
@@ -55,7 +56,7 @@
 #circleCalculator #inputFields {
    display: flex;
    flex-direction: column;
-   gap: 10px;
+   gap: 8px;
 }
 
 #circleCalculator label {
@@ -63,7 +64,9 @@
 }
 
 #circleCalculator select {
-   width: 70px;
+   width: 85px;
+   background-color: white;
+   color: #3a3a3a;
 }
 
 #circleCalculator .labelInputCombo {
